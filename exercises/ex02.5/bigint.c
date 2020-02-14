@@ -33,8 +33,13 @@ s: string
 returns: string
 */
 char *reverse_string(char *s) {
-    //TODO: Fill this in.
-    return "";
+    size_t len = strlen(s);
+    char * t = malloc(sizeof(char) * len);
+
+    for (int i = 0; i<len; i++){
+        *(t+i) = *(s+len-1-i);
+    }
+    return t;
 }
 
 /* ctoi: Converts a character to integer.
@@ -53,7 +58,11 @@ i: integer 0 to 9
 returns: character '0' to '9'
 */
 char itoc(int i) {
+    if (i <= 9 && i >= 0){
+        return (char) (i+'0');
+    }
     //TODO: Fill this in, with an appropriate assertion.
+    printf("Invalid integer was attempted to be converted to character");
     return '0';
 }
 
@@ -70,7 +79,15 @@ carry: pointer to char
 
 */
 void add_digits(char a, char b, char c, char *total, char *carry) {
-    //TODO: Fill this in.
+    
+    int val = ctoi(a) + ctoi(b) + ctoi(c);
+    if (val > 9){
+        *carry = itoc(1);
+        val = val - 10;
+    }else{
+        *carry = itoc(0);
+    }
+    *total = itoc(val);
 }
 
 /* Define a type to represent a BigInt.
@@ -111,9 +128,9 @@ void add_bigint(BigInt x, BigInt y, char carry_in, BigInt z) {
         b = *y;
     }
 
-    // printf("%c %c %c\n", a, b, carry_in);
+    //printf("%c %c %c\n", a, b, carry_in);
     add_digits(a, b, carry_in, &total, &carry_out);
-    // printf("%c %c\n", carry_out, total);
+    //printf("%c %c\n", carry_out, total);
 
     // if total and carry are 0, we're done
     if (total == '0' && carry_out == '0') {
@@ -205,6 +222,6 @@ int main (int argc, char *argv[])
 
     //TODO: When you have the first three functions working,
     //      uncomment the following, and it should work.
-    // test_add_bigint();
+    test_add_bigint();
     return 0;
 }
