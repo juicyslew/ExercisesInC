@@ -44,8 +44,10 @@ void find_track_regex(char pattern[])
         } else if (ret == REG_NOMATCH) {
             continue;
         } else {
-            regerror(ret, &regex, msgbuf, sizeof(msgbuf));
-            fprintf(stderr, "Regex match failed: %s\n", msgbuf);
+            size_t errsize = regerror(code, preg, (char *)NULL, (size_t)0);
+            char *errbuf = malloc(errsize * sizeof(char));
+            regerror(ret, &regex, errbuf, errsize);
+            fprintf(stderr, "Regex match failed: %s\n", errbuf);
             exit(1);
         }
     }
