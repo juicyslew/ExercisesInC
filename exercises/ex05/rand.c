@@ -75,10 +75,73 @@ float my_random_float2()
     return b.f;
 }
 
-// compute a random double using my algorithm
 double my_random_double()
 {
-    // TODO: fill this in
+    long long x, exp, mant;
+    double f;
+
+    // this union is for assembling the float.
+    union {
+        double d;
+        long long ll;
+    } b;
+
+    // generate 31 random bits (assuming that RAND_MAX is 2^31 - 1
+    x = random() | random() << 32;
+
+    // use bit-scan-forward to find the first set bit and
+    // compute the exponent
+    
+    // DOESN'T WORK
+    asm ("bsfq %1, %0;"
+    :"=r"(exp)
+    :"r"(x)
+    );
+    exp = 1022 - exp;
+
+    // use the other 23 bits for the mantissa (for small numbers
+    // this means we are re-using some bits)
+    mant = x >> 11;
+    b.ll = (exp << 52) | mant;
+
+    return b.d;
+}
+
+// compute a random double using my algorithm
+double my_random_double2()
+{
+    long long x;
+    long long mant;
+    long long exp = 1022;
+    long long mask = 1;
+
+    union {
+        double d;
+        long long ll;
+    } b;
+
+    // generate random bits until we see the first set bit
+    while (1) {
+        x = random();
+        if (x == 0) {
+            exp -= 31;
+        } else {
+            break;
+        }
+    }
+
+    // find the location of the first set bit and compute the exponent
+    x |= random() << 32;
+    while (x & mask) {
+        mask <<= 1;
+        exp--;
+    }
+
+    // use the remaining bit as the mantissa (???)
+    mant = x >> 11;
+    b.ll = (exp << 52) | mant;
+
+    return b.d;
 }
 
 // return a constant (this is a dummy function for time trials)
@@ -114,7 +177,7 @@ float random_float()
 
 
 // generate a random double using the standard algorithm
-float random_double()
+double random_double()
 {
     int x;
     double f;
