@@ -30,6 +30,11 @@ Node *make_node(int val, Node *next) {
     return node;
 }
 
+void free_node(Node **node_ptr){
+    free(*node_ptr);
+    *node_ptr = NULL;
+}
+
 
 /* Prints the values in a list.
 *
@@ -54,8 +59,24 @@ void print_list(Node **list) {
 * returns: int or -1 if the list is empty
 */
 int pop(Node **list) {
-    // FILL THIS IN!
-    return 0;
+    Node *current = *list;
+    int val = -1;
+    if (current == NULL){
+        return val;
+    }
+    if (current->next == NULL){
+        val = current->val;
+        free_node(&current);
+        return val;
+    }
+
+
+    while(current->next->next != NULL){
+        current = current->next;
+    }
+    val = current->next->val;
+    free_node(&(current->next));
+    return val;
 }
 
 
@@ -65,6 +86,17 @@ int pop(Node **list) {
 * val: value to add
 */
 void push(Node **list, int val) {
+    Node *current = *list;
+    if (current == NULL){
+        current = make_node(val, NULL);
+        return;
+    }
+
+    while(current->next != NULL){
+        current = current->next;
+    }
+    current->next = make_node(val, NULL);
+    return;
     // FILL THIS IN!
 }
 
@@ -79,7 +111,30 @@ void push(Node **list, int val) {
 * returns: number of nodes removed
 */
 int remove_by_value(Node **list, int val) {
-    // FILL THIS IN!
+    Node *current = *list;
+    if (current == NULL){
+        return 0;
+    }
+    if (current->next == NULL){
+        if (current->val = val){
+            val = current->val;
+            free_node(&current);
+            return 1;
+        }else{
+            return 0;
+        }
+    }
+
+    while(current->next->next != NULL){
+        if (current->next->val == val){
+            Node *removal = current->next;
+            current->next = current->next->next;
+            free_node(&removal);
+
+            return 1;
+        }
+        current = current->next;
+    }
     return 0;
 }
 
@@ -91,7 +146,18 @@ int remove_by_value(Node **list, int val) {
 * list: pointer to pointer to Node
 */
 void reverse(Node **list) {
-    // FILL THIS IN!
+    Node *n_curr = *list;
+    Node *n_next = n_curr; // Starts as curr to be changed at the start of the loop
+    Node *n_last = NULL;
+    
+    while(n_curr != NULL){
+        n_next = n_next->next; //this happens here so as to not ever be NULL without being caught
+        n_curr->next = n_last;
+        n_last = n_curr;
+        n_curr = n_next;
+    }
+    *list = n_last;
+    return;
 }
 
 

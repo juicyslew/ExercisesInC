@@ -1,0 +1,191 @@
+==10350== Memcheck, a memory error detector
+==10350== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
+==10350== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
+==10350== Command: ./a.out
+==10350== Parent PID: 3905
+==10350== 
+--10350-- 
+--10350-- Valgrind options:
+--10350--    --leak-check=full
+--10350--    --show-leak-kinds=all
+--10350--    --track-origins=yes
+--10350--    --verbose
+--10350--    --log-file=valgrind-out.txt
+--10350-- Contents of /proc/version:
+--10350--   Linux version 4.15.0-96-generic (buildd@lgw01-amd64-007) (gcc version 5.4.0 20160609 (Ubuntu 5.4.0-6ubuntu1~16.04.12)) #97~16.04.1-Ubuntu SMP Wed Apr 1 03:03:31 UTC 2020
+--10350-- 
+--10350-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-lzcnt-rdtscp-sse3-avx-avx2-bmi
+--10350-- Page sizes: currently 4096, max supported 4096
+--10350-- Valgrind library directory: /usr/lib/valgrind
+--10350-- Reading syms from /home/juicyslew/Documents/ClassWork/SoftSys/Code/ExercisesInC/exercises/ex06/a.out
+--10350-- Reading syms from /lib/x86_64-linux-gnu/ld-2.23.so
+--10350--   Considering /lib/x86_64-linux-gnu/ld-2.23.so ..
+--10350--   .. CRC mismatch (computed 10d8ea02 wanted 4fdda1aa)
+--10350--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/ld-2.23.so ..
+--10350--   .. CRC is valid
+--10350-- Reading syms from /usr/lib/valgrind/memcheck-amd64-linux
+--10350--   Considering /usr/lib/valgrind/memcheck-amd64-linux ..
+--10350--   .. CRC mismatch (computed eea41ea9 wanted 2009db78)
+--10350--    object doesn't have a symbol table
+--10350--    object doesn't have a dynamic symbol table
+--10350-- Scheduler: using generic scheduler lock implementation.
+--10350-- Reading suppressions file: /usr/lib/valgrind/default.supp
+==10350== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-10350-by-juicyslew-on-???
+==10350== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-10350-by-juicyslew-on-???
+==10350== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-10350-by-juicyslew-on-???
+==10350== 
+==10350== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==10350== don't want to do, unless you know exactly what you're doing,
+==10350== or are doing some strange experiment):
+==10350==   /usr/lib/valgrind/../../bin/vgdb --pid=10350 ...command...
+==10350== 
+==10350== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==10350==   /path/to/gdb ./a.out
+==10350== and then give GDB the following command
+==10350==   target remote | /usr/lib/valgrind/../../bin/vgdb --pid=10350
+==10350== --pid is optional if only one valgrind process is running
+==10350== 
+--10350-- REDIR: 0x401cf10 (ld-linux-x86-64.so.2:strlen) redirected to 0x3809e181 (???)
+--10350-- Reading syms from /usr/lib/valgrind/vgpreload_core-amd64-linux.so
+--10350--   Considering /usr/lib/valgrind/vgpreload_core-amd64-linux.so ..
+--10350--   .. CRC mismatch (computed 2567ccf6 wanted 49420590)
+--10350--    object doesn't have a symbol table
+--10350-- Reading syms from /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so
+--10350--   Considering /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so ..
+--10350--   .. CRC mismatch (computed 0e27c9a8 wanted ac585421)
+--10350--    object doesn't have a symbol table
+==10350== WARNING: new redirection conflicts with existing -- ignoring it
+--10350--     old: 0x0401cf10 (strlen              ) R-> (0000.0) 0x3809e181 ???
+--10350--     new: 0x0401cf10 (strlen              ) R-> (2007.0) 0x04c31020 strlen
+--10350-- REDIR: 0x401b860 (ld-linux-x86-64.so.2:index) redirected to 0x4c30bc0 (index)
+--10350-- REDIR: 0x401ba80 (ld-linux-x86-64.so.2:strcmp) redirected to 0x4c320d0 (strcmp)
+--10350-- REDIR: 0x401dc70 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x4c35270 (mempcpy)
+--10350-- Reading syms from /lib/x86_64-linux-gnu/libc-2.23.so
+--10350--   Considering /lib/x86_64-linux-gnu/libc-2.23.so ..
+--10350--   .. CRC mismatch (computed 10016417 wanted 1f868c97)
+--10350--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/libc-2.23.so ..
+--10350--   .. CRC is valid
+--10350-- REDIR: 0x4ec9a00 (libc.so.6:strcasecmp) redirected to 0x4a286f0 (_vgnU_ifunc_wrapper)
+--10350-- REDIR: 0x4ec5280 (libc.so.6:strcspn) redirected to 0x4a286f0 (_vgnU_ifunc_wrapper)
+--10350-- REDIR: 0x4ecbcf0 (libc.so.6:strncasecmp) redirected to 0x4a286f0 (_vgnU_ifunc_wrapper)
+--10350-- REDIR: 0x4ec76f0 (libc.so.6:strpbrk) redirected to 0x4a286f0 (_vgnU_ifunc_wrapper)
+--10350-- REDIR: 0x4ec7a80 (libc.so.6:strspn) redirected to 0x4a286f0 (_vgnU_ifunc_wrapper)
+--10350-- REDIR: 0x4ec914b (libc.so.6:memcpy@GLIBC_2.2.5) redirected to 0x4a286f0 (_vgnU_ifunc_wrapper)
+--10350-- REDIR: 0x4ec7400 (libc.so.6:rindex) redirected to 0x4c308a0 (rindex)
+--10350-- REDIR: 0x4ebe130 (libc.so.6:malloc) redirected to 0x4c2db20 (malloc)
+==10350== Invalid read of size 4
+==10350==    at 0x400610: read_element (in /home/juicyslew/Documents/ClassWork/SoftSys/Code/ExercisesInC/exercises/ex06/a.out)
+==10350==    by 0x4006B3: main (in /home/juicyslew/Documents/ClassWork/SoftSys/Code/ExercisesInC/exercises/ex06/a.out)
+==10350==  Address 0x520412c is 4 bytes before a block of size 400 alloc'd
+==10350==    at 0x4C2DB8F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==10350==    by 0x400670: main (in /home/juicyslew/Documents/ClassWork/SoftSys/Code/ExercisesInC/exercises/ex06/a.out)
+==10350== 
+==10350== Invalid read of size 4
+==10350==    at 0x400610: read_element (in /home/juicyslew/Documents/ClassWork/SoftSys/Code/ExercisesInC/exercises/ex06/a.out)
+==10350==    by 0x4006C7: main (in /home/juicyslew/Documents/ClassWork/SoftSys/Code/ExercisesInC/exercises/ex06/a.out)
+==10350==  Address 0x52042c0 is 0 bytes after a block of size 400 alloc'd
+==10350==    at 0x4C2DB8F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==10350==    by 0x400670: main (in /home/juicyslew/Documents/ClassWork/SoftSys/Code/ExercisesInC/exercises/ex06/a.out)
+==10350== 
+--10350-- REDIR: 0x4ebe4f0 (libc.so.6:free) redirected to 0x4c2ed80 (free)
+==10350== Invalid write of size 4
+==10350==    at 0x4006DE: main (in /home/juicyslew/Documents/ClassWork/SoftSys/Code/ExercisesInC/exercises/ex06/a.out)
+==10350==  Address 0x5204090 is 0 bytes inside a block of size 4 free'd
+==10350==    at 0x4C2EDEB: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==10350==    by 0x4006D6: main (in /home/juicyslew/Documents/ClassWork/SoftSys/Code/ExercisesInC/exercises/ex06/a.out)
+==10350==  Block was alloc'd at
+==10350==    at 0x4C2DB8F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==10350==    by 0x40064E: main (in /home/juicyslew/Documents/ClassWork/SoftSys/Code/ExercisesInC/exercises/ex06/a.out)
+==10350== 
+==10350== Invalid free() / delete / delete[] / realloc()
+==10350==    at 0x4C2EDEB: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==10350==    by 0x4005ED: free_anything (in /home/juicyslew/Documents/ClassWork/SoftSys/Code/ExercisesInC/exercises/ex06/a.out)
+==10350==    by 0x4006FF: main (in /home/juicyslew/Documents/ClassWork/SoftSys/Code/ExercisesInC/exercises/ex06/a.out)
+==10350==  Address 0xffefff4ec is on thread 1's stack
+==10350==  in frame #2, created by main (???:)
+==10350== 
+==10350== Invalid free() / delete / delete[] / realloc()
+==10350==    at 0x4C2EDEB: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==10350==    by 0x40071D: main (in /home/juicyslew/Documents/ClassWork/SoftSys/Code/ExercisesInC/exercises/ex06/a.out)
+==10350==  Address 0x5204040 is 0 bytes inside a block of size 4 free'd
+==10350==    at 0x4C2EDEB: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==10350==    by 0x40070E: main (in /home/juicyslew/Documents/ClassWork/SoftSys/Code/ExercisesInC/exercises/ex06/a.out)
+==10350==  Block was alloc'd at
+==10350==    at 0x4C2DB8F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==10350==    by 0x40063D: main (in /home/juicyslew/Documents/ClassWork/SoftSys/Code/ExercisesInC/exercises/ex06/a.out)
+==10350== 
+==10350== 
+==10350== HEAP SUMMARY:
+==10350==     in use at exit: 404 bytes in 2 blocks
+==10350==   total heap usage: 4 allocs, 4 frees, 412 bytes allocated
+==10350== 
+==10350== Searching for pointers to 2 not-freed blocks
+==10350== Checked 63,888 bytes
+==10350== 
+==10350== 4 bytes in 1 blocks are definitely lost in loss record 1 of 2
+==10350==    at 0x4C2DB8F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==10350==    by 0x40065F: main (in /home/juicyslew/Documents/ClassWork/SoftSys/Code/ExercisesInC/exercises/ex06/a.out)
+==10350== 
+==10350== 400 bytes in 1 blocks are definitely lost in loss record 2 of 2
+==10350==    at 0x4C2DB8F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==10350==    by 0x400670: main (in /home/juicyslew/Documents/ClassWork/SoftSys/Code/ExercisesInC/exercises/ex06/a.out)
+==10350== 
+==10350== LEAK SUMMARY:
+==10350==    definitely lost: 404 bytes in 2 blocks
+==10350==    indirectly lost: 0 bytes in 0 blocks
+==10350==      possibly lost: 0 bytes in 0 blocks
+==10350==    still reachable: 0 bytes in 0 blocks
+==10350==         suppressed: 0 bytes in 0 blocks
+==10350== 
+==10350== ERROR SUMMARY: 7 errors from 7 contexts (suppressed: 0 from 0)
+==10350== 
+==10350== 1 errors in context 1 of 7:
+==10350== Invalid free() / delete / delete[] / realloc()
+==10350==    at 0x4C2EDEB: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==10350==    by 0x40071D: main (in /home/juicyslew/Documents/ClassWork/SoftSys/Code/ExercisesInC/exercises/ex06/a.out)
+==10350==  Address 0x5204040 is 0 bytes inside a block of size 4 free'd
+==10350==    at 0x4C2EDEB: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==10350==    by 0x40070E: main (in /home/juicyslew/Documents/ClassWork/SoftSys/Code/ExercisesInC/exercises/ex06/a.out)
+==10350==  Block was alloc'd at
+==10350==    at 0x4C2DB8F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==10350==    by 0x40063D: main (in /home/juicyslew/Documents/ClassWork/SoftSys/Code/ExercisesInC/exercises/ex06/a.out)
+==10350== 
+==10350== 
+==10350== 1 errors in context 2 of 7:
+==10350== Invalid free() / delete / delete[] / realloc()
+==10350==    at 0x4C2EDEB: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==10350==    by 0x4005ED: free_anything (in /home/juicyslew/Documents/ClassWork/SoftSys/Code/ExercisesInC/exercises/ex06/a.out)
+==10350==    by 0x4006FF: main (in /home/juicyslew/Documents/ClassWork/SoftSys/Code/ExercisesInC/exercises/ex06/a.out)
+==10350==  Address 0xffefff4ec is on thread 1's stack
+==10350==  in frame #2, created by main (???:)
+==10350== 
+==10350== 
+==10350== 1 errors in context 3 of 7:
+==10350== Invalid write of size 4
+==10350==    at 0x4006DE: main (in /home/juicyslew/Documents/ClassWork/SoftSys/Code/ExercisesInC/exercises/ex06/a.out)
+==10350==  Address 0x5204090 is 0 bytes inside a block of size 4 free'd
+==10350==    at 0x4C2EDEB: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==10350==    by 0x4006D6: main (in /home/juicyslew/Documents/ClassWork/SoftSys/Code/ExercisesInC/exercises/ex06/a.out)
+==10350==  Block was alloc'd at
+==10350==    at 0x4C2DB8F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==10350==    by 0x40064E: main (in /home/juicyslew/Documents/ClassWork/SoftSys/Code/ExercisesInC/exercises/ex06/a.out)
+==10350== 
+==10350== 
+==10350== 1 errors in context 4 of 7:
+==10350== Invalid read of size 4
+==10350==    at 0x400610: read_element (in /home/juicyslew/Documents/ClassWork/SoftSys/Code/ExercisesInC/exercises/ex06/a.out)
+==10350==    by 0x4006C7: main (in /home/juicyslew/Documents/ClassWork/SoftSys/Code/ExercisesInC/exercises/ex06/a.out)
+==10350==  Address 0x52042c0 is 0 bytes after a block of size 400 alloc'd
+==10350==    at 0x4C2DB8F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==10350==    by 0x400670: main (in /home/juicyslew/Documents/ClassWork/SoftSys/Code/ExercisesInC/exercises/ex06/a.out)
+==10350== 
+==10350== 
+==10350== 1 errors in context 5 of 7:
+==10350== Invalid read of size 4
+==10350==    at 0x400610: read_element (in /home/juicyslew/Documents/ClassWork/SoftSys/Code/ExercisesInC/exercises/ex06/a.out)
+==10350==    by 0x4006B3: main (in /home/juicyslew/Documents/ClassWork/SoftSys/Code/ExercisesInC/exercises/ex06/a.out)
+==10350==  Address 0x520412c is 4 bytes before a block of size 400 alloc'd
+==10350==    at 0x4C2DB8F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==10350==    by 0x400670: main (in /home/juicyslew/Documents/ClassWork/SoftSys/Code/ExercisesInC/exercises/ex06/a.out)
+==10350== 
+==10350== ERROR SUMMARY: 7 errors from 7 contexts (suppressed: 0 from 0)
