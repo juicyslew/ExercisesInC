@@ -66,7 +66,7 @@ void print_value (Value *value)
     }
     switch (value->type) {
         case INT:
-        printf ("%d", value->i);
+        printf ("%i", value->i);
         break;
         case STRING:
         printf ("%s", value->s);
@@ -114,17 +114,6 @@ Hashable *make_hashable(void *key,
 }
 
 
-/* Prints a Hashable object.
-*
-* hashable: pointer to hashable
-*/
-void print_hashable(Hashable *hashable)
-{
-    printf ("key %p\n", hashable->key);
-    printf ("hash %p\n", hashable->hash);
-}
-
-
 /* Hashes an integer.
 *
 * p: pointer to integer
@@ -165,7 +154,18 @@ int hash_string(void *p)
 */
 int hash_hashable(Hashable *hashable)
 {
-    return hashable->hash (hashable->key);
+    return hashable->hash(hashable->key);
+}
+
+/* Prints a Hashable object.
+*
+* hashable: pointer to hashable
+*/
+void print_hashable(Hashable *hashable)
+{
+    printf ("key %p\n", hashable->key);
+    printf ("hashptr %p\n", hashable->hash);
+    printf ("hashval %i\n", hash_hashable(hashable));
 }
 
 
@@ -178,8 +178,9 @@ int hash_hashable(Hashable *hashable)
 */
 int equal_int (void *ip, void *jp)
 {
-    // FILL THIS IN!
-    return 0;
+    int i = *(int *)ip;
+    int j = *(int *)jp;
+    return i == j;
 }
 
 
@@ -192,8 +193,19 @@ int equal_int (void *ip, void *jp)
 */
 int equal_string (void *s1, void *s2)
 {
-    // FILL THIS IN!
-    return 0;
+    char *c1 = (char *)s1;
+    char *c2 = (char *)s2;
+    int i = 0;
+    int equal = 0;
+    while(c1[i] == c2[i])
+    {
+        if (c1[i] == '\0'){
+            equal = 1;
+            break;
+        }
+        i++;
+    }
+    return equal;
 }
 
 
@@ -207,8 +219,8 @@ int equal_string (void *s1, void *s2)
 */
 int equal_hashable(Hashable *h1, Hashable *h2)
 {
-    // FILL THIS IN!
-    return 0;
+    int val = h1->equal(h1->key, h2->key);
+    return val;
 }
 
 
@@ -296,7 +308,13 @@ Node *prepend(Hashable *key, Value *value, Node *rest)
 /* Looks up a key and returns the corresponding value, or NULL */
 Value *list_lookup(Node *list, Hashable *key)
 {
-    // FILL THIS IN!
+    Node* cptr = list;
+    while (cptr != NULL){
+        if (equal_hashable(cptr->key, key)){
+            return cptr->value;
+        }
+        cptr = cptr->next;
+    }
     return NULL;
 }
 
@@ -341,6 +359,10 @@ void print_map(Map *map)
 /* Adds a key-value pair to a map. */
 void map_add(Map *map, Hashable *key, Value *value)
 {
+    int addloc = hash_hashable(key) % map->n;
+    printf("Addloc: %i", addloc);
+    map->lists[addloc] = prepend(key, value, map->lists[addloc]);
+    return;
     // FILL THIS IN!
 }
 
@@ -348,8 +370,8 @@ void map_add(Map *map, Hashable *key, Value *value)
 /* Looks up a key and returns the corresponding value, or NULL. */
 Value *map_lookup(Map *map, Hashable *key)
 {
-    // FILL THIS IN!
-    return NULL;
+    Node* head = map->lists[hash_hashable(key) % map->n];
+    return list_lookup(head, key);
 }
 
 
